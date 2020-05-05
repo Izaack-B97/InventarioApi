@@ -16,8 +16,8 @@ app.use(morgan('dev'));
 
 // Routes
 app.use('/', routerIndex);
-app.use('/modulos', routerModules);
+app.use('/api', routerModules);
 
 app.listen(app.get('port'), () => {
-    console.log(`El servidor esta corriendo en el puerto ${app.get('port')}`);
+    console.log(`El api esta corriendo en el puerto ${app.get('port')}`);
 });
