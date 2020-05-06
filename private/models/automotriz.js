@@ -1,11 +1,13 @@
-const mongoose = require('../config/database');
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
-let automotrizSchema = {
+let automotrizSchema = new Schema({
     clave: { type: String },
     existencia: { type: Number },
     precio: { type: Number, default: 0 },
-    update_at: { type: Date } 
-};
+}, {
+    timestamps: true
+});
 
 const Automotriz = mongoose.model('Automotriz', automotrizSchema);
 

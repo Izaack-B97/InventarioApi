@@ -1,6 +1,8 @@
+require('../private/config/database');
+
+
 const express = require('express');
 const router = express.Router();
-const mongoose = require('../private/config/database');
 const Automotriz = require('../private/models/automotriz');
 
 // Todos los registros en automoviles
@@ -48,23 +50,24 @@ router.get('/automotrices/:id', async (req, res) => {
     }
 })
 
-router.put('/automotrices/:id', async(req, res) => {
-    try {
-        let id = req.body.id;
-        let datos = {
-            clave: req.body.clave,
-            existencia: req.body.existencia,
-            precio: req.body.precio,
-            update_at: req.body.update_at
-        };
 
-        let result = await Automotriz.updateOne({ _id:id },{ $set: datos }).exec();
-        
+router.put('/automotrices/:id', async (req, res) => {
+    try {
+        let id = req.params.id;
+        const { clave, existencia, precio } = req.body;
+        let data = {
+            clave,
+            existencia,
+            precio
+        }
+        let result = await Automotriz.updateOne({ _id: id }, { $set: data });        
+
         res.json(result);
     } catch (error) {
-        
+        res.status(500).json(error);
     }
 });
+
 
 router.delete('/automotrices/:id',async (req, res) => {
     try {
